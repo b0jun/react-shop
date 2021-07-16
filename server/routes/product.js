@@ -42,4 +42,13 @@ router.post('/', auth, (req, res) => {
 	});
 });
 
+router.post('/products', (req, res) => {
+	Product.find()
+		.populate('write')
+		.exec((err, productInfo) => {
+			if (err) return res.status(400).json({ success: false, err });
+			return res.status(200).json({ success: true, productInfo });
+		});
+});
+
 module.exports = router;

@@ -57,7 +57,7 @@ const FileUpload = (props) => {
 			</Dropzone>
 			<div style={{ display: 'flex', width: '350px', height: '240px', overflowX: 'scroll' }}>
 				{Images.map((image, index) => (
-					<div key={image} onClick={() => onDelete(image)}>
+					<div key={index} onClick={() => onDelete(image)}>
 						<img
 							style={{ minWidth: '300px', width: '300px', height: '240px' }}
 							src={`http://localhost:5000/${image}`}
