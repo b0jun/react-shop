@@ -3,7 +3,8 @@ import axios from 'axios';
 import { Icon, Col, Card, Row } from 'antd';
 import ImageSlider from '../../utils/ImageSlider';
 import CheckBox from './Sections/CheckBox';
-import { continents } from './Sections/Datas';
+import { continents, price } from './Sections/Datas';
+import RadioBox from './Sections/RadioBox';
 
 const { Meta } = Card;
 
@@ -59,10 +60,29 @@ function LandingPage() {
 		setSkip(0);
 	};
 
+	const onPrice = (value) => {
+		const data = price;
+		let array = [];
+
+		for (let key in data) {
+			if (data[key]._id === parseInt(value, 10)) {
+				array = data[key].array;
+			}
+		}
+		console.log('array', array);
+		return array;
+	};
+
 	const onFilters = (filters, category) => {
 		const newFilters = { ...Filters };
 		newFilters[category] = filters;
+		if (category === 'price') {
+			let priceValues = onPrice(filters);
+			newFilters[category] = priceValues;
+		}
+		console.log(newFilters);
 		showFilteredResults(newFilters);
+		setFilters(newFilters);
 	};
 
 	return (
@@ -72,7 +92,18 @@ function LandingPage() {
 					Let's Travel Anywhere <Icon type="rocket" />
 				</h2>
 			</div>
-			<CheckBox list={continents} onFilters={(filters) => onFilters(filters, 'continents')} />
+			<Row gutter={[16, 16]}>
+				<Col lg={12} xs={24}>
+					<CheckBox
+						list={continents}
+						onFilters={(filters) => onFilters(filters, 'continents')}
+					/>
+				</Col>
+				<Col lg={12} xs={24}>
+					<RadioBox list={price} onFilters={(filters) => onFilters(filters, 'price')} />
+				</Col>
+			</Row>
+
 			<Row gutter={[16, 16]}>{renderCards}</Row>
 			<br />
 			{PostSize >= Limit && (

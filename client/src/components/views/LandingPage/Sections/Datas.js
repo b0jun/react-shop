@@ -27,7 +27,7 @@ const price = [
 	{
 		_id: 5,
 		name: 'More than $300',
-		array: [300, 1500000],
+		array: [300, 100000],
 	},
 ];
 

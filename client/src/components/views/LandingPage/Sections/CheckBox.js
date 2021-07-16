@@ -25,14 +25,14 @@ const CheckBox = (props) => {
 	};
 
 	const renderCheckboxLists = () =>
-		props.list?.map((value, index) => (
-			<div style={{ marginRight: 10, display: 'inline' }} key={index}>
-				<Checkbox
-					onChange={() => onToggle(value._id)}
-					checked={Checked.indexOf(value._id) === -1 ? false : true}
-				/>
-				<>{value.name}</>
-			</div>
+		props.list?.map((value) => (
+			<Checkbox
+				key={value._id}
+				onChange={() => onToggle(value._id)}
+				checked={Checked.indexOf(value._id) === -1 ? false : true}
+			>
+				{value.name}
+			</Checkbox>
 		));
 
 	return (
